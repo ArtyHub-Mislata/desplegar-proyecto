@@ -1,0 +1,98 @@
+services:
+  front-bank:
+    build:
+      context: .
+      dockerfile: banco-front.Dockerfile
+    container_name: front-bank-artyhub
+    environment:
+      VIRTUAL_HOST: bank-artyhub.preproducciondaw.cip.fpmislata.com
+    networks:
+      - proxy_red
+
+  front-adm:
+    build:
+      context: .
+      dockerfile: adm-front.Dockerfile
+    container_name: front-adm-artyhub
+    environment:
+      VIRTUAL_HOST: adm-artyhub.preproducciondaw.cip.fpmislata.com
+    networks:
+      - proxy_red
+
+  front-store:
+    build:
+      context: .
+      dockerfile: tienda-front.Dockerfile
+    container_name: front-store-artyhub
+    environment:
+      VIRTUAL_HOST: store-artyhub.preproducciondaw.cip.fpmislata.com
+    networks:
+      - proxy_red
+
+  back-bank:
+    build:
+      context: .
+      dockerfile: banco-back.Dockerfile
+    container_name: back-bank-artyhub
+    environment:
+      VIRTUAL_HOST: bank-back-artyhub.preproducciondaw.cip.fpmislata.com
+      SPRING_PROFILES_ACTIVE: pre
+    depends_on:
+      mariadb-bank:
+        condition: service_healthy
+    networks:
+      - proxy_red
+
+  back-store:
+    build:
+      context: .
+      dockerfile: tienda-back.Dockerfile
+    container_name: back-store-artyhub
+    environment:
+      VIRTUAL_HOST: store-back-artyhub.preproducciondaw.cip.fpmislata.com
+      SPRING_PROFILES_ACTIVE: pre
+    depends_on:
+      mariadb-store:
+        condition: service_healthy
+    networks:
+      - proxy_red
+
+  mariadb-bank:
+    image: mariadb:latest
+    container_name: mariadb-artyhub-bank
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: artyhub_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    networks:
+      - proxy_red
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb -u root -proot -e 'SELECT 1'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  mariadb-store:
+    image: mariadb:latest
+    container_name: mariadb-artyhub-store
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: artyhub_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    networks:
+      - proxy_red
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb -u root -proot -e 'SELECT 1'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+networks:
+  proxy_red:
+    name: nginx-proxy-network
+    external: true
+

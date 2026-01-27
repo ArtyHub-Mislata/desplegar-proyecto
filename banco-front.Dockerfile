@@ -1,0 +1,16 @@
+FROM node:22.19.0 AS build
+
+RUN apt-get install -y git
+
+WORKDIR /opt/app
+RUN git clone https://github.com/ArtyHub-Mislata/banco-front.git
+WORKDIR /opt/app/banco-front
+RUN git switch --detach origin/develop
+RUN npm ci
+RUN npm run build --prod
+
+FROM nginx:1.28.0-alpine3.21
+COPY --from=build /opt/app/banco-front/dist/banco-front/browser/ /usr/share/nginx/html
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
