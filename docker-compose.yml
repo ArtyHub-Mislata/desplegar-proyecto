@@ -36,7 +36,6 @@ services:
     container_name: back-bank-artyhub
     environment:
       VIRTUAL_HOST: bank-back-artyhub.preproducciondaw.cip.fpmislata.com
-      SPRING_PROFILES_ACTIVE: pre
     depends_on:
       mariadb-bank:
         condition: service_healthy
@@ -50,7 +49,6 @@ services:
     container_name: back-store-artyhub
     environment:
       VIRTUAL_HOST: store-back-artyhub.preproducciondaw.cip.fpmislata.com
-      SPRING_PROFILES_ACTIVE: pre
     depends_on:
       mariadb-store:
         condition: service_healthy
@@ -63,8 +61,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: artyhub_db
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
+      MYSQL_USER: artyhub_bank
+      MYSQL_PASSWORD: artyhub_bank
     networks:
       - proxy_red
     healthcheck:
@@ -80,8 +78,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: artyhub_db
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
+      MYSQL_USER: artyhub_store
+      MYSQL_PASSWORD: artyhub_store
     networks:
       - proxy_red
     healthcheck:

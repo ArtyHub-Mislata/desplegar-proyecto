@@ -6,7 +6,7 @@ WORKDIR /opt/app
 RUN git clone https://github.com/ArtyHub-Mislata/tienda-adm-front.git
 WORKDIR /opt/app/tienda-adm-front
 RUN git switch --detach origin/develop
-RUN npm ci
+RUN npm ci --legacy-peer-deps
 RUN npm run build --prod
 
 FROM nginx:1.28.0-alpine3.21
