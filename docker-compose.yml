@@ -5,7 +5,7 @@ services:
       dockerfile: banco-front.Dockerfile
     container_name: front-bank-artyhub
     environment:
-      VIRTUAL_HOST: bank-artyhub.preproducciondaw.cip.fpmislata.com
+      VIRTUAL_HOST: bank-artyhub.producciondaw.cip.fpmislata.com
     networks:
       - proxy_red
 
@@ -15,7 +15,7 @@ services:
       dockerfile: adm-front.Dockerfile
     container_name: front-adm-artyhub
     environment:
-      VIRTUAL_HOST: adm-artyhub.preproducciondaw.cip.fpmislata.com
+      VIRTUAL_HOST: adm-artyhub.producciondaw.cip.fpmislata.com
     networks:
       - proxy_red
 
@@ -25,7 +25,7 @@ services:
       dockerfile: tienda-front.Dockerfile
     container_name: front-store-artyhub
     environment:
-      VIRTUAL_HOST: store-artyhub.preproducciondaw.cip.fpmislata.com
+      VIRTUAL_HOST: store-artyhub.producciondaw.cip.fpmislata.com
     networks:
       - proxy_red
 
@@ -35,7 +35,7 @@ services:
       dockerfile: banco-back.Dockerfile
     container_name: back-bank-artyhub
     environment:
-      VIRTUAL_HOST: bank-back-artyhub.preproducciondaw.cip.fpmislata.com
+      VIRTUAL_HOST: bank-back-artyhub.producciondaw.cip.fpmislata.com
     depends_on:
       mariadb-bank:
         condition: service_healthy
@@ -48,7 +48,7 @@ services:
       dockerfile: tienda-back.Dockerfile
     container_name: back-store-artyhub
     environment:
-      VIRTUAL_HOST: store-back-artyhub.preproducciondaw.cip.fpmislata.com
+      VIRTUAL_HOST: store-back-artyhub.producciondaw.cip.fpmislata.com
     depends_on:
       mariadb-store:
         condition: service_healthy
