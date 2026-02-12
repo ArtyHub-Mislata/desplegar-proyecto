@@ -36,6 +36,7 @@ services:
     container_name: back-bank-artyhub
     environment:
       VIRTUAL_HOST: bank-back-artyhub.preproducciondaw.cip.fpmislata.com
+      VIRTUAL_PORT: 8081
     depends_on:
       mariadb-bank:
         condition: service_healthy
