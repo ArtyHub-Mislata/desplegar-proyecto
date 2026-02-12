@@ -71,6 +71,8 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
+    volumes:
+      - db_bank_data:/var/lib/mysql
 
   mariadb-store:
     image: mariadb:latest
@@ -88,9 +90,15 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
+    volumes:
+      - db_store_data:/var/lib/mysql
 
 networks:
   proxy_red:
     name: nginx-proxy-network
     external: true
+
+volumes:
+  db_bank_data:
+  db_store_data:
 
