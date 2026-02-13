@@ -50,6 +50,7 @@ services:
     container_name: back-store-artyhub
     environment:
       VIRTUAL_HOST: store-back-artyhub.preproducciondaw.cip.fpmislata.com
+      VIRTUAL_PORT: 8080
     depends_on:
       mariadb-store:
         condition: service_healthy
