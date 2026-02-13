@@ -62,8 +62,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: banco_db
-      MYSQL_USER: artyhub_bank
-      MYSQL_PASSWORD: artyhub_bank
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
     networks:
       - proxy_red
     healthcheck:
@@ -81,8 +81,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: artyhub_db
-      MYSQL_USER: artyhub_store
-      MYSQL_PASSWORD: artyhub_store
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
     networks:
       - proxy_red
     healthcheck:
